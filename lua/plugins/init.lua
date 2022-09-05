@@ -46,6 +46,7 @@ packer.startup(function(use)
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
 	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "lewis6991/impatient.nvim" -- speeds up startup time
+  use "numToStr/Comment.nvim" -- Easily comment stuff
 
   -- Manages LSP servers, debug adapters, linters, and formatters
   use "williamboman/mason.nvim"
@@ -68,12 +69,15 @@ packer.startup(function(use)
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
-  use 'nvim-telescope/telescope-media-files.nvim'
+  use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use "JoosepAlviste/nvim-ts-context-commentstring"
   use "p00f/nvim-ts-rainbow"
-  use "nvim-treesitter/playground"
+
+  -- Auto close brackets
+  use "windwp/nvim-autopairs"
 
   -- Colorschemes
   use "lunarvim/colorschemes"
@@ -93,4 +97,6 @@ require "plugins.configs.cmp"
 require "plugins.configs.lsp"
 require "plugins.configs.telescope"
 require "plugins.configs.treesitter"
+require "plugins.configs.autopairs"
+require "plugins.configs.comment"
 
