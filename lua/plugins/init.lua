@@ -70,6 +70,7 @@ packer.startup(function(use)
   -- LSP stuff
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
+  use "jose-elias-alvarez/null-ls.nvim"
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -103,14 +104,5 @@ packer.startup(function(use)
 end)
 
 -- configure plugins
-require "plugins.configs.mason"
-require "plugins.configs.cmp"
-require "plugins.configs.lsp"
-require "plugins.configs.telescope"
-require "plugins.configs.treesitter"
-require "plugins.configs.autopairs"
-require "plugins.configs.comment"
-require "plugins.configs.gitsigns"
-require "plugins.configs.nvim_tree"
-require "plugins.configs.bufferline"
+require("plugins.configs")
 

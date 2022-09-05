@@ -28,7 +28,7 @@ M.general = function()
   keymap("n", "<C-k>", "<C-w>k", opts)
   keymap("n", "<C-l>", "<C-w>l", opts)
 
-  -- Open Lexplore 
+  -- Open Lexplore
   --keymap("n", "<leader>e", ":Lex 30 <CR>", opts)
 
   -- Resize with arrows
@@ -50,7 +50,7 @@ M.general = function()
   keymap("n", "<ESC>", ":noh<CR>", opts)
 
   -- Insert --
-  -- Press jk fast to exit insert mode 
+  -- Press jk fast to exit insert mode
   --keymap("i", "jk", "<ESC>", opts)
 
   -- Visual --
@@ -79,6 +79,7 @@ M.general = function()
 end
 
 M.lsp = function(bufnr)
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   bufkeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   bufkeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -92,7 +93,6 @@ M.lsp = function(bufnr)
   bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
   bufkeymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   bufkeymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
 M.telescope = function()
@@ -100,6 +100,11 @@ M.telescope = function()
   keymap("n", "<leader>fw", ":Telescope live_grep<cr>", opts)
   keymap("n", "<leader>fb", ":Telescope buffers<cr>", opts)
   keymap("n", "<leader>fh", ":Telescope help_tags<cr>", opts)
+
+  -- overwrite some LSP mappings
+  keymap("n", "<leader>gd", ":Telescope lsp_definitions<cr>", opts)
+  keymap("n", "<leader>gr", ":Telescope lsp_references<cr>", opts)
+  keymap("n", "<leader>gi", ":Telescope lsp_implementations<cr>", opts)
 end
 
 M.nvim_tree = function()
