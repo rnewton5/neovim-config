@@ -19,7 +19,7 @@ end
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost ~/.config/nvim/lua/plugins/init.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -39,7 +39,7 @@ packer.init({
 })
 
 -- Install your plugins here
-return packer.startup(function(use)
+packer.startup(function(use)
 	-- My plugins here
 	use "wbthomason/packer.nvim"  -- Have packer manage itself
 	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
@@ -79,3 +79,10 @@ return packer.startup(function(use)
 		require("packer").sync()
 	end
 end)
+
+-- configure plugins
+require "plugins.configs.mason"
+require "plugins.configs.cmp"
+require "plugins.configs.lsp"
+require "plugins.configs.telescope"
+

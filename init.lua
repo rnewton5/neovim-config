@@ -1,9 +1,5 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.colorscheme"
-require "user.mason"
-require "user.cmp"
-require "user.lsp"
-require "user.telescope"
+require("colorscheme")
+require("options")
+require("keymaps").general()
+require("plugins")
 
