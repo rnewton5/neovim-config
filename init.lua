@@ -5,4 +5,5 @@ require "user.colorscheme"
 require "user.mason"
 require "user.cmp"
 require "user.lsp"
+require "user.telescope"
 
