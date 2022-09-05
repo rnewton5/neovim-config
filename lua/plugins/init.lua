@@ -47,6 +47,14 @@ packer.startup(function(use)
 	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "lewis6991/impatient.nvim" -- speeds up startup time
   use "numToStr/Comment.nvim" -- Easily comment stuff
+  use "kyazdani42/nvim-web-devicons" -- File icons
+  use "moll/vim-bbye" -- Better closing of buffers
+
+  -- File explorer
+  use "kyazdani42/nvim-tree.lua"
+
+  -- Bufferline
+  use "akinsho/bufferline.nvim"
 
   -- Manages LSP servers, debug adapters, linters, and formatters
   use "williamboman/mason.nvim"
@@ -103,4 +111,6 @@ require "plugins.configs.treesitter"
 require "plugins.configs.autopairs"
 require "plugins.configs.comment"
 require "plugins.configs.gitsigns"
+require "plugins.configs.nvim_tree"
+require "plugins.configs.bufferline"
 

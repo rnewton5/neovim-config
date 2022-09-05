@@ -29,7 +29,7 @@ M.general = function()
   keymap("n", "<C-l>", "<C-w>l", opts)
 
   -- Open Lexplore 
-  keymap("n", "<leader>e", ":Lex 30 <CR>", opts)
+  --keymap("n", "<leader>e", ":Lex 30 <CR>", opts)
 
   -- Resize with arrows
   keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -40,6 +40,7 @@ M.general = function()
   -- Navigate buffers
   keymap("n", "<S-l>", ":bnext<CR>", opts)
   keymap("n", "<S-h>", ":bprevious<CR>", opts)
+  keymap("n", "<leader>x", ":Bdelete<CR>", opts)
 
   -- Move text up and down
   keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
@@ -50,7 +51,7 @@ M.general = function()
 
   -- Insert --
   -- Press jk fast to exit insert mode 
-  -- keymap("i", "jk", "<ESC>", opts)
+  --keymap("i", "jk", "<ESC>", opts)
 
   -- Visual --
   -- Stay in indent mode
@@ -99,6 +100,10 @@ M.telescope = function()
   keymap("n", "<leader>fw", ":Telescope live_grep<cr>", opts)
   keymap("n", "<leader>fb", ":Telescope buffers<cr>", opts)
   keymap("n", "<leader>fh", ":Telescope help_tags<cr>", opts)
+end
+
+M.nvim_tree = function()
+  keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 end
 
 return M
