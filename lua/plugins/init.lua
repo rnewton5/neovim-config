@@ -40,10 +40,12 @@ packer.init({
 
 -- Install your plugins here
 packer.startup(function(use)
-	-- My plugins here
-	use "wbthomason/packer.nvim"  -- Have packer manage itself
-	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+  -- have packer manager itself
+	use "wbthomason/packer.nvim"
+
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
+	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+  use "lewis6991/impatient.nvim" -- speeds up startup time
 
   -- Manages LSP servers, debug adapters, linters, and formatters
   use "williamboman/mason.nvim"
@@ -68,6 +70,11 @@ packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
 
+  -- Treesitter
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/playground"
+
   -- Colorschemes
   use "lunarvim/colorschemes"
   use "folke/tokyonight.nvim"
@@ -85,4 +92,5 @@ require "plugins.configs.mason"
 require "plugins.configs.cmp"
 require "plugins.configs.lsp"
 require "plugins.configs.telescope"
+require "plugins.configs.treesitter"
 

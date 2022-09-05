@@ -3,7 +3,7 @@ local function setup_plugin(plugin_name, opts)
   if not plugin_ok then
     vim.notify(plugin_name .. " not found")
     return false
-  else 
+  else
     plugin.setup(opts)
     return true
   end
