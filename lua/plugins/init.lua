@@ -50,6 +50,9 @@ packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- File icons
   use "moll/vim-bbye" -- Better closing of buffers
 
+  -- Statusline
+  use "nvim-lualine/lualine.nvim"
+
   -- File explorer
   use "kyazdani42/nvim-tree.lua"
 
