@@ -79,6 +79,9 @@ packer.startup(function(use)
   -- Auto close brackets
   use "windwp/nvim-autopairs"
 
+  -- Git integration
+  use "lewis6991/gitsigns.nvim"
+
   -- Colorschemes
   use "lunarvim/colorschemes"
   use "folke/tokyonight.nvim"
@@ -99,4 +102,5 @@ require "plugins.configs.telescope"
 require "plugins.configs.treesitter"
 require "plugins.configs.autopairs"
 require "plugins.configs.comment"
+require "plugins.configs.gitsigns"
 
