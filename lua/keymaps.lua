@@ -79,20 +79,28 @@ M.general = function()
 end
 
 M.lsp = function(bufnr)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  local has_telescope, _ = pcall(require, "telescope")
+  if has_telescope then
+    bufkeymap(bufnr, "n", "gd", ":Telescope lsp_definitions<cr>", opts)
+    bufkeymap(bufnr, "n", "gr", ":Telescope lsp_references<cr>", opts)
+    bufkeymap(bufnr, "n", "gi", ":Telescope lsp_implementations<cr>", opts)
+  else
+    bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    bufkeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    bufkeymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  end
+
   bufkeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   bufkeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  bufkeymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  bufkeymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  bufkeymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  bufkeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  bufkeymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  bufkeymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  bufkeymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  bufkeymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>ld", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>l[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  bufkeymap(bufnr, "n", "<leader>l]", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  bufkeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-  bufkeymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  bufkeymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
 M.telescope = function()
@@ -100,11 +108,6 @@ M.telescope = function()
   keymap("n", "<leader>fw", ":Telescope live_grep<cr>", opts)
   keymap("n", "<leader>fb", ":Telescope buffers<cr>", opts)
   keymap("n", "<leader>fh", ":Telescope help_tags<cr>", opts)
-
-  -- overwrite some LSP mappings
-  keymap("n", "<leader>gd", ":Telescope lsp_definitions<cr>", opts)
-  keymap("n", "<leader>gr", ":Telescope lsp_references<cr>", opts)
-  keymap("n", "<leader>gi", ":Telescope lsp_implementations<cr>", opts)
 end
 
 M.nvim_tree = function()

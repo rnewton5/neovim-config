@@ -59,6 +59,9 @@ packer.startup(function(use)
   -- Bufferline
   use "akinsho/bufferline.nvim"
 
+  -- Terminal
+  use "akinsho/toggleterm.nvim"
+
   -- Manages LSP servers, debug adapters, linters, and formatters
   use "williamboman/mason.nvim"
 
