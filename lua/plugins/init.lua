@@ -50,6 +50,9 @@ packer.startup(function(use)
   use "kyazdani42/nvim-web-devicons" -- File icons
   use "moll/vim-bbye" -- Better closing of buffers
 
+  -- Dashboard
+  use "goolord/alpha-nvim"
+
   -- Statusline
   use "nvim-lualine/lualine.nvim"
 
@@ -61,6 +64,9 @@ packer.startup(function(use)
 
   -- Terminal
   use "akinsho/toggleterm.nvim"
+
+  -- Guides on indented lines
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- Manages LSP servers, debug adapters, linters, and formatters
   use "williamboman/mason.nvim"
