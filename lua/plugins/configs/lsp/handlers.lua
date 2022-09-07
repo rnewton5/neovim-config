@@ -64,7 +64,14 @@ M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
   end
+
+  -- keymaps
   require("keymaps").lsp(bufnr)
+  local has_telescope, _ = pcall(require, "telescope")
+  if has_telescope then
+    require("keymaps").lsp_telescope(bufnr)
+  end
+
   lsp_highlight_document(client)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   vim.notify("LSP Attached")

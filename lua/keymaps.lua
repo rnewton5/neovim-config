@@ -79,17 +79,9 @@ M.general = function()
 end
 
 M.lsp = function(bufnr)
-  local has_telescope, _ = pcall(require, "telescope")
-  if has_telescope then
-    bufkeymap(bufnr, "n", "gd", ":Telescope lsp_definitions<cr>", opts)
-    bufkeymap(bufnr, "n", "gr", ":Telescope lsp_references<cr>", opts)
-    bufkeymap(bufnr, "n", "gi", ":Telescope lsp_implementations<cr>", opts)
-  else
-    bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    bufkeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    bufkeymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  end
-
+  bufkeymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  bufkeymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  bufkeymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   bufkeymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   bufkeymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   bufkeymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
@@ -103,11 +95,34 @@ M.lsp = function(bufnr)
   bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 end
 
+M.lsp_telescope = function(bufnr)
+  -- overwrites some LSP keymaps
+  --   should be called after lsp only if Telescope is installed
+  bufkeymap(bufnr, "n", "gd", ":Telescope lsp_definitions<cr>", opts)
+  bufkeymap(bufnr, "n", "gr", ":Telescope lsp_references<cr>", opts)
+  bufkeymap(bufnr, "n", "gi", ":Telescope lsp_implementations<cr>", opts)
+end
+
+M.lsp_rust_tools = function(bufnr, rust_tools)
+  -- overwrites some LSP keymaps
+  --   should be called after lsp if using rust_tools
+  -- Hover actions
+  vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+  -- Code action groups
+  vim.keymap.set("n", "<Leader>la", rust_tools.code_action_group.code_action_group, { buffer = bufnr })
+end
+
 M.telescope = function()
   keymap("n", "<leader>ff", ":Telescope find_files<cr>", opts)
   keymap("n", "<leader>fw", ":Telescope live_grep<cr>", opts)
   keymap("n", "<leader>fb", ":Telescope buffers<cr>", opts)
   keymap("n", "<leader>fh", ":Telescope help_tags<cr>", opts)
+end
+
+M.dap = function()
+  keymap("n", "<leader>du", ":lua require('dapui').toggle()<cr>", opts)
+  keymap("n", "<leader>dh", ":PBToggleBreakpoint<cr>", opts)
+  keymap("n", "<leader>dH", ":PBSetConditionalBreakpoint<cr>", opts)
 end
 
 M.nvim_tree = function()

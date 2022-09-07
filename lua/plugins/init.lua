@@ -1,19 +1,16 @@
 local fn = vim.fn
 
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
+local ensure_packer = function()
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd([[
@@ -83,6 +80,15 @@ packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
+  use "simrat39/rust-tools.nvim"
+
+  -- Debugging
+  use {"mfussenegger/nvim-dap"}
+  use "theHamsta/nvim-dap-virtual-text"
+  use "rcarriga/nvim-dap-ui"
+  use "nvim-telescope/telescope-dap.nvim"
+  use "jbyuki/one-small-step-for-vimkind"
+  --use "Weissle/persistent-breakpoints.nvim"
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -103,6 +109,9 @@ packer.startup(function(use)
   -- Git integration
   use "lewis6991/gitsigns.nvim"
 
+  -- Highlight 
+  use "RRethy/vim-illuminate"
+
   -- Colorschemes
   use "lunarvim/colorschemes"
   use "folke/tokyonight.nvim"
@@ -110,7 +119,7 @@ packer.startup(function(use)
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
+	if packer_bootstrap then
 		require("packer").sync()
 	end
 end)
