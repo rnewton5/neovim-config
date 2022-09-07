@@ -31,12 +31,11 @@ if (rust_tools_ok) then
     },
     dap = {
       adapter = require('rust-tools.dap').get_codelldb_adapter(
-        "~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
-        "~/.local/share/nvim/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
+        "/home/rhett/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
+        "/home/rhett/.local/share/nvim/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
       )
     }
   })
-  vim.notify(vim.env.HOME)
 end
 
 handlers.setup()
