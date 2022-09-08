@@ -1,9 +1,9 @@
 local fn = vim.fn
 
 local ensure_packer = function()
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -23,25 +23,25 @@ vim.cmd([[
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-	return
+  return
 end
 
 -- Have packer use a popup window
 packer.init({
-	display = {
-		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
-		end,
-	},
+  display = {
+    open_fn = function()
+      return require("packer.util").float({ border = "rounded" })
+    end,
+  },
 })
 
 -- Install your plugins here
 packer.startup(function(use)
   -- have packer manager itself
-	use "wbthomason/packer.nvim"
+  use "wbthomason/packer.nvim"
 
-	use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
-	use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+  use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
+  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "lewis6991/impatient.nvim" -- speeds up startup time
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons" -- File icons
@@ -83,12 +83,12 @@ packer.startup(function(use)
   use "simrat39/rust-tools.nvim"
 
   -- Debugging
-  use {"mfussenegger/nvim-dap"}
+  use "mfussenegger/nvim-dap"
   use "theHamsta/nvim-dap-virtual-text"
   use "rcarriga/nvim-dap-ui"
   use "nvim-telescope/telescope-dap.nvim"
   use "jbyuki/one-small-step-for-vimkind"
-  --use "Weissle/persistent-breakpoints.nvim"
+  use "Weissle/persistent-breakpoints.nvim"
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -109,7 +109,7 @@ packer.startup(function(use)
   -- Git integration
   use "lewis6991/gitsigns.nvim"
 
-  -- Highlight 
+  -- Highlight
   use "RRethy/vim-illuminate"
 
   -- Colorschemes
@@ -117,13 +117,12 @@ packer.startup(function(use)
   use "folke/tokyonight.nvim"
   use "morhetz/gruvbox"
 
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require("packer").sync()
-	end
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)
 
 -- configure plugins
 require("plugins.configs")
-
