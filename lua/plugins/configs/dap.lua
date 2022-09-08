@@ -16,7 +16,7 @@ dap.adapters.codelldb = {
   port = "${port}",
   executable = {
     -- CHANGE THIS to your path!
-    command = "/home/rhett/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
+    command = "codelldb",
     args = { "--port", "${port}" },
 
     -- On windows you may have to uncomment this:
