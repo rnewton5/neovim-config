@@ -33,7 +33,7 @@ dap.configurations.cpp = {
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-    stopOnEntry = true,
+    stopOnEntry = false,
   },
 }
 
@@ -110,10 +110,9 @@ dapui.setup({
 
 local pb_ok, pb = pcall(require, "persistent-breakpoints")
 
-if not pb_ok or true then
+if not pb_ok then
   return
 end
-
 
 pb.setup()
 
