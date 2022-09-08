@@ -46,6 +46,10 @@ packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons" -- File icons
   use "moll/vim-bbye" -- Better closing of buffers
+  use "MunifTanjim/nui.nvim"
+
+  -- Source per-project config file (.exrc.lua)
+  use "MunifTanjim/exrc.nvim"
 
   -- Dashboard
   use "goolord/alpha-nvim"

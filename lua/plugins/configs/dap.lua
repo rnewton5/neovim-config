@@ -11,19 +11,17 @@ end
 -- setup keymaps for dap
 require("keymaps").dap()
 
+-- Setup adapters
 dap.adapters.codelldb = {
   type = 'server',
   port = "${port}",
   executable = {
-    -- CHANGE THIS to your path!
     command = "codelldb",
     args = { "--port", "${port}" },
-
-    -- On windows you may have to uncomment this:
-    -- detached = false,
   }
 }
 
+-- Setup launch configurations
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -36,7 +34,6 @@ dap.configurations.cpp = {
     stopOnEntry = false,
   },
 }
-
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
@@ -108,6 +105,7 @@ dapui.setup({
   }
 })
 
+-- Persist breakpoints between sessions
 local pb_ok, pb = pcall(require, "persistent-breakpoints")
 
 if not pb_ok then
