@@ -41,6 +41,7 @@ M.general = function()
   keymap("n", "<S-l>", ":bnext<CR>", opts)
   keymap("n", "<S-h>", ":bprevious<CR>", opts)
   keymap("n", "<leader>x", ":Bdelete<CR>", opts)
+  keymap("n", "<leader>X", ":Bdelete!<CR>", opts)
 
   -- Move text up and down
   keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
@@ -92,6 +93,7 @@ M.lsp = function(bufnr)
   bufkeymap(bufnr, "n", "<leader>l[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   bufkeymap(bufnr, "n", "<leader>l]", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   bufkeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>lo", "<cmd>SymbolsOutline<CR>", opts)
   bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 end
 
@@ -123,6 +125,10 @@ M.dap = function()
   keymap("n", "<leader>du", ":lua require('dapui').toggle()<cr>", opts)
   keymap("n", "<leader>dh", ":PBToggleBreakpoint<cr>", opts)
   keymap("n", "<leader>dH", ":PBSetConditionalBreakpoint<cr>", opts)
+  keymap("n", "<F5>", ":DapContinue<cr>", opts)
+  keymap("n", "<F10>", ":DapStepOver<cr>", opts)
+  keymap("n", "<F12>", ":DapStepInto<cr>", opts)
+  keymap("n", "<S-F12>", ":DapStepOut<cr>", opts)
 end
 
 M.nvim_tree = function()

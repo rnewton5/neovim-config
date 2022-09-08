@@ -80,6 +80,7 @@ packer.startup(function(use)
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
+  use "simrat39/symbols-outline.nvim"
   use "simrat39/rust-tools.nvim"
 
   -- Debugging
