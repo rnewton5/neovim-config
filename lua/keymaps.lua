@@ -73,10 +73,10 @@ M.general = function()
 
   -- Terminal --
   -- Better terminal navigation
-  keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-  keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-  keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-  keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+  --[[ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts) ]]
+  --[[ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts) ]]
+  --[[ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts) ]]
+  --[[ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts) ]]
 end
 
 M.lsp = function(bufnr)
@@ -122,7 +122,7 @@ M.telescope = function()
 end
 
 M.dap = function()
-  keymap("n", "<leader>du", ":lua require('dapui').toggle()<cr>", opts)
+  keymap("n", "<leader>du", ":lua require('dapui').toggle({ reset = true })<cr>", opts)
   keymap("n", "<leader>dh", ":PBToggleBreakpoint<cr>", opts)
   keymap("n", "<leader>dH", ":PBSetConditionalBreakpoint<cr>", opts)
   keymap("n", "<leader>dg", ":lua require('dap').goto_(vim.api.nvim_win_get_cursor(0)[1])<cr>", opts)

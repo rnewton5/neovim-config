@@ -12,7 +12,7 @@ end
 require("keymaps").dap()
 
 -- Set custom breakpoint signs
-vim.fn.sign_define('DapStopped', {text='➡ ', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', {text='=>', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapBreakpointCondition', {text='⛔', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapBreakpointRejected', {text='🚫', texthl='', linehl='', numhl=''})
@@ -46,7 +46,7 @@ dap.configurations.rust = dap.configurations.cpp
 
 -- register listeners to open and close dapui automatically
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
+  dapui.open({ reset = true })
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
   dapui.close()
