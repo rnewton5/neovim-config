@@ -117,6 +117,12 @@ packer.startup(function(use)
   -- Highlight
   use "RRethy/vim-illuminate"
 
+  -- Scrollbar with diagnostics
+  use "petertriho/nvim-scrollbar"
+
+  -- Project integration
+  use "ahmedkhalf/project.nvim"
+
   -- Colorschemes
   use "lunarvim/colorschemes"
   use "folke/tokyonight.nvim"
