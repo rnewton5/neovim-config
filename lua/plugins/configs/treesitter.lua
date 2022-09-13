@@ -5,8 +5,9 @@ if not treesitter_ok then
 end
 
 configs.setup {
-  ensure_installed = "all",
+  ensure_installed = {},
   sync_install = false,
+  auto_install = true,
   ignore_install = { "" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
