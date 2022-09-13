@@ -17,6 +17,9 @@ local sumneko_opts = settings.sumneko_lua
 sumneko_opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
 lspconfig.sumneko_lua.setup(sumneko_opts)
 
+-- C#
+lspconfig.csharp_ls.setup(opts)
+
 -- rust (via rust-tools)
 local rust_tools_ok, rust_tools = pcall(require, "rust-tools")
 if (rust_tools_ok) then
