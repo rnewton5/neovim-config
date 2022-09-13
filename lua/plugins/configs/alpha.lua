@@ -20,12 +20,14 @@ dashboard.section.header.val = {
   [[       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ]],
   [[]],
 }
+
+local configHome = vim.fn.stdpath("config")
 dashboard.section.buttons.val = {
 	dashboard.button("<leader>ff", "  Find file", ":Telescope find_files <CR>"),
 	dashboard.button("<leader>fr", "  Recently used files", ":Telescope oldfiles <CR>"),
 	dashboard.button("<leader>fw", "  Find text", ":Telescope live_grep <CR>"),
 	dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
-	dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
+	dashboard.button("c", "  Configuration", ":cd " .. configHome .. "<CR> :e init.lua <CR>"),
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
