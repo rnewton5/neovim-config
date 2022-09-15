@@ -12,24 +12,31 @@ end
 require("keymaps").dap()
 
 -- Set custom breakpoint signs
-vim.fn.sign_define('DapStopped', {text='=>', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapBreakpointCondition', {text='⛔', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapBreakpointRejected', {text='🚫', texthl='', linehl='', numhl=''})
-vim.fn.sign_define('DapLogPoint', {text='L', texthl='', linehl='', numhl=''})
+vim.fn.sign_define('DapStopped', { text = '=>', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = '⛔', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '🚫', texthl = '', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = 'L', texthl = '', linehl = '', numhl = '' })
 
 -- Setup adapters
-dap.adapters.codelldb = {
-  type = 'server',
-  port = "${port}",
-  executable = {
-    command = "codelldb",
-    args = { "--port", "${port}" },
+dap.adapters.codelldb = function(cb, config)
+  if config.preLaunchTask then
+    vim.notify("Performing pre-launch tasks")
+    config.preLaunchTask()
+  end
+  local adapter = {
+    type = 'server',
+    port = "${port}",
+    executable = {
+      command = "codelldb",
+      args = { "--port", "${port}" },
+    }
   }
-}
+  cb(adapter)
+end
 
--- Setup launch configurations
-dap.configurations.cpp = {
+-- Setup default launch configurations
+local codelldb_config = {
   {
     name = "Launch file",
     type = "codelldb",
@@ -41,8 +48,9 @@ dap.configurations.cpp = {
     stopOnEntry = false,
   },
 }
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+dap.configurations.cpp = codelldb_config
+dap.configurations.c = codelldb_config
+dap.configurations.rust = codelldb_config
 
 -- register listeners to open and close dapui automatically
 dap.listeners.after.event_initialized["dapui_config"] = function()
