@@ -120,9 +120,6 @@ packer.startup(function(use)
   -- Scrollbar with diagnostics
   use "petertriho/nvim-scrollbar"
 
-  -- Project integration
-  use "ahmedkhalf/project.nvim"
-
   -- Colorschemes
   use "lunarvim/colorschemes"
   use "folke/tokyonight.nvim"

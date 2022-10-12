@@ -72,9 +72,9 @@ M.general = function()
 
   -- Terminal --
   -- Better terminal navigation
-  --[[ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts) ]]
-  --[[ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts) ]]
-  --[[ keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts) ]]
+  keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", opts)
+  keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
+  keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
   --[[ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts) ]]
 end
 
@@ -91,7 +91,7 @@ M.lsp = function(bufnr)
   bufkeymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   bufkeymap(bufnr, "n", "<leader>l[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   bufkeymap(bufnr, "n", "<leader>l]", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  bufkeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  bufkeymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", opts)
   bufkeymap(bufnr, "n", "<leader>lo", "<cmd>SymbolsOutline<CR>", opts)
   bufkeymap(bufnr, "n", "gl", '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 end
@@ -133,6 +133,13 @@ end
 
 M.nvim_tree = function()
   keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+end
+
+M.toggle_term = function()
+  keymap("n", "<leader>tf", ":ToggleTerm direction=float<cr>", opts)
+  keymap("n", "<leader>th", ":ToggleTerm direction=horizontal size=10<cr>", opts)
+  keymap("n", "<C-\\>", ":ToggleTerm<cr>", opts)
+  vim.keymap.set("t", "<C-\\>", require("toggleterm").toggle_all, {})
 end
 
 return M

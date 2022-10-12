@@ -3,9 +3,11 @@ if not status_ok then
 	return
 end
 
+-- register nvim-tree keymaps
+require("keymaps").toggle_term()
+
 toggleterm.setup({
 	size = 20,
-	open_mapping = [[<c-\>]],
 	hide_numbers = true,
 	shade_filetypes = {},
 	shade_terminals = true,
